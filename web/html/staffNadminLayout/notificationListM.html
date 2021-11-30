@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>LKL Edu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel ="stylesheet" type="text/css" href="../../css/style.css">
+    <link rel='icon' type="image/png" sizes="16x16" href="../../images/favicon.png">
+    <script src="../../js/scripts.js"></script>
+
+    <!-- icon -->
+    <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
+    <!-- icon -->
+</head>
+
+<body>
+    <!--Header-->
+    <nav class="navbar navbar-expand-md bg-white navbar-white">
+        <img id="logo" src="../../images/LKLlogo.png"><a class="navbar-brand" href="#"></a>
+    </nav>
+
+    <!--DataView-->
+    <div class="fit-content-w">
+        <div class="row">
+            <!--Menu-->
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                <nav class="navbar navbar-light" style="padding-top: 0px;">
+                    <ul class="navbar-nav nav nav-pills" >
+                        <div style="border-style: ridge; border-radius: 10px;">
+                            <br><img src="../../images/ava2.png" style="border-radius: 50%; height: 50%; width: 50%; display: block; margin-left: auto; margin-right: auto;">
+                            <li class="nav-item"><p class="nav-link" style="text-align: center;">KentStaffAdmin</p></li>
+                        </div>
+                        <br>
+                        <li class="nav-item active"><a class="nav-link" href="notificationListM.html">Quản lý Thông báo</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item"><a class="nav-link" href="courseListM.html">Quản lý Khóa học</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item"><a class="nav-link" href="studyandexamScheduleM.html">Quản lý Lịch học và thi</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item"><a class="nav-link" href="studentInfoM.html">Quản lý TT Học viên</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item"><a class="nav-link" href="teacherInfoM.html">Quản lý TT Giảng viên</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item"><a class="nav-link" href="../home.html">Đăng xuất</a></li>
+                        <div class="dropdown-divider"></div>
+                    </ul>
+                </nav>
+            </div>
+
+            <!--DataGridView-->
+            <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                <h4 style="padding-left: 15px;"><img src="../../images/notificationList_icon.png" width="40" height="40" alt="folder icon">&thinsp;Quản lý Thông báo</h4>
+                <!--Notification List-->
+                <span onclick="openForm()" class="l-btn noselect">Thêm thông báo mới</span>
+                <table id="MyTable" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tên thông báo</th>
+                            <th>Ngày đăng</th>
+                            <th>Điều khiển</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="notify-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+
+    <!--PopupAdd Form-->
+    <div class="form-popup" id="popupForm" style="max-width: 500px; max-height: 550px; overflow: scroll;">
+        <form action="" class="form-container">
+            <h1 style="text-align: center;"><b>Thêm thông báo</b></h1>
+            <label for="headNotif"><b>Tiêu đề</b></label>
+            <input id="notif-title" type="text" placeholder="Nhập tiêu đề thông báo" name="headNotif">
+            <label for="contentNotif"><b>Nội dung</b></label>
+            <textarea type="text" id="contentNotif" name="contentNotif" placeholder="Nhập nội dung thông báo" style="height:180px"></textarea>
+            <button type="submit" class="btn" onclick="handlePostNotify()">Thêm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Đóng</button>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        function openFormEdit(){document.getElementById("popupEdit").style.display = "block";}
+        function closeFormEdit(){document.getElementById("popupEdit").style.display = "none";}
+    </script>
+    <!--PopupEdit Form-->
+    <div class="form-popup" id="popupEdit" style="max-width: 500px; max-height: 550px; overflow: scroll;">
+        <form action="" class="form-container">
+            <h1 style="text-align: center;"><b>Sửa TT thông báo</b></h1>
+            <label for="headNotif"><b>Tiêu đề</b></label>
+            <input type="text" placeholder="Nhập tiêu đề thông báo" name="headNotif" value="[KHAI GIẢNG] Khóa học Phân tích thiết kế giải thuật">
+            <label for="contentNotif"><b>Nội dung</b></label>
+            <textarea type="text" id="contentNotif" name="contentNotif" placeholder="Nhập nội dung thông báo" style="height:180px">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam ipsum ex repudiandae enim? Tempora autem voluptatibus asperiores odio non, nemo aspernatur dolor mollitia repellat dignissimos veritatis sapiente quam ut voluptate.
+            </textarea>
+            <button type="submit" class="btn">Xác nhận</button>
+            <button type="button" class="btn cancel" onclick="closeFormEdit()">Đóng</button>
+        </form>
+    </div>
+
+    <!-- Delete Confirm Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+
+                    <input id='deleteitem' type='hidden' name='confirm'>
+                    <button onclick="handleDeleteNotify()" type="submit" class="btn btn-danger">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div id="footer">
+        <div class="row">
+            <!--Map Picture-->
+            <img src="../../images/map.png" width="400" heigh="400" class="flex map">
+            <!--Info Footer-->
+            <div class="infoFooter">
+                <h>Nhóm phát triển phần mềm LKL Edu</h><br>
+                <h>19 Nguyễn Hữu Thọ,Tân Phong,Q7,TPHCM</h><br>
+                <h>Hotline: (+84) 0987654321</h><br>
+                <h>Email: lklsupport@gmail.com</h><br>
+                <h>Copyright © 2020 by lkledu.vn</h><br>
+                <!--Some Other Media-->
+                <img src="../../images/twitterLogo.png" width="100" class="twitterLogo">
+                <img src="../../images/facebookLogo.png" width="60">
+                <img src="../../images/instagramLogo.png" width="55">
+            </div>
+        </div>
+        <!--Product Footer-->
+        <div class="productFooter">
+            <p><img src="https://kichi.ggg.com.vn/wp-content/uploads/2018/10/bct.png"/></p>
+            <p>Producted by LKL Software Team.</p>
+        </div>
+        <th>Tình trạng</th>
+        <th>Tình trạng</th>
+    </div>
+    <script src="../../js/getNotifyForModerator.js"></script>
+    <script src="../../js/postNotify.js"></script>
+    <script src="../../js/deleteNotify.js"></script>
+    <script>
+        let selectedNotify;
+
+        function handleDeleteNotify() {
+            deleteNotify(selectedNotify.id)
+            window.location.reload()
+        }
+
+        function makeClickDeleteEvent(notification_idx) {
+            selectedNotify = notifList[notification_idx]
+            $('#myModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
+
+        getNofity()
+
+        function handlePostNotify() {
+            var title = document.getElementById("notif-title").value
+            var content = document.getElementById("contentNotif").value
+            postNotify(title, content)
+        }
+    </script>
+</body>
+</html>
+
